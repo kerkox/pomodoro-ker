@@ -1,3 +1,7 @@
+# Pomodo Ker
+
+if you want contribute with this proyect feel free and make a pull request 😉
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
