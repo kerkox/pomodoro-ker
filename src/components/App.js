@@ -1,9 +1,12 @@
 import React from 'react'
-
+import { BrowserRouter } from 'react-router-dom'
+import Menu from './Menu'
 
 const App = () => {
   return (
-<div><h1>Pomodoro Ker</h1></div>
+    <BrowserRouter>
+    <Menu/>
+    </BrowserRouter>
   );
 }
 
