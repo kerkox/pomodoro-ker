@@ -18,10 +18,12 @@ class Timer extends Component {
 
   render() {
     return (
-      <div className="center">
-        <h1>
-          {this.state.timeMinutes} : { this.state.timeSeconds }
-        </h1>
+      <div className="box">
+        <div className="center">
+          <h1>
+            {this.state.timeMinutes} : {this.state.timeSeconds}
+          </h1>
+        </div>
       </div>
     );
   }
