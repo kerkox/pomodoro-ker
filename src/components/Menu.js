@@ -1,13 +1,17 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Menu = () => {
   return (
-    <nav>
-      <Link to="/">Home</Link>
-      <Link to="/settings">Settings</Link>      
+    <nav class="">
+      <a class="" href="">
+        <Link to="/">Home</Link>
+      </a>
+      <a class="" href="">
+        <Link to="/settings">Settings</Link>
+      </a>
     </nav>
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;
