@@ -4,7 +4,12 @@ const INITIAL_STATE = {
   time: {
     minutes: 0,
     seconds: 0
-  }
+  },
+  timeConfig: {
+        minutes: 25,
+  },
+  pause: false,
+  intervalID: 0,
 }
 
 export default (state = INITIAL_STATE, action) => {

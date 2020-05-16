@@ -1,17 +1,22 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux'
 
 class Timer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      timeConfig: {
-        minutes: 25,
-      },
-      timeMinutes: 25,
-      timeSeconds: 0,
-      pause: false,
-      intervalID: 0,
-    };
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     timeConfig: {
+  //       minutes: 25,
+  //     },
+  //     timeMinutes: 25,
+  //     timeSeconds: 0,
+  //     pause: false,
+  //     intervalID: 0,
+  //   };
+  // }
+
+  componentDidMount() {
+    this.pause();
   }
 
   getTimerString = (time) => {
@@ -23,8 +28,8 @@ class Timer extends Component {
   };
 
   decreaseTime = () => {
-    let seconds = this.state.timeSeconds - 1;
-    let minutes = this.state.timeMinutes;
+    let seconds = this.state.time.seconds - 1;
+    let minutes = this.state.time.minutes;
     if (seconds < 0) {
       seconds = 59;
       minutes -= 1;
@@ -34,8 +39,10 @@ class Timer extends Component {
     }
     this.setState({
       ...this.state,
-      timeSeconds: seconds,
-      timeMinutes: minutes,
+      time: { 
+        seconds,
+        minutes
+      }
     });
   };
   pause = () => {
@@ -46,8 +53,10 @@ class Timer extends Component {
   reset = () => {
     this.setState({
       ...this.state,
-      timeMinutes: this.state.timeConfig.minutes,
-      timeSeconds: 0,
+      time:{
+        minutes: this.state.timeConfig.minutes,
+        seconds: 0,
+      }
     });
   };
 
@@ -71,10 +80,7 @@ class Timer extends Component {
       <div className="box">
         <div className="center">
           <h1>
-            {this.getTimerString({
-              minutes: this.state.timeMinutes,
-              seconds: this.state.timeSeconds,
-            })}
+            {this.getTimerString(this.state.time) }
           </h1>
           <button type="button" onClick={this.start}>
             Start
@@ -91,4 +97,8 @@ class Timer extends Component {
   }
 }
 
-export default Timer;
+const mapStateToProps = (reducers) => {
+  return reducers.timerReducer;
+}
+
+export default connect(mapStateToProps, {/* actions */})(Timer);
