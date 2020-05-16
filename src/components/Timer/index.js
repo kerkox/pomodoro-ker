@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux'
-import * as timerActions from '../../actions/timerActions';
+import { connect } from "react-redux";
+import * as timerActions from "../../actions/timerActions";
 
 class Timer extends Component {
   // constructor(props) {
@@ -29,7 +29,7 @@ class Timer extends Component {
   };
 
   decreaseTime = () => {
-   this.props.decreaseTime();
+    this.props.decreaseTime();
   };
   pause = () => {
     console.log("Pause the timer!!");
@@ -41,12 +41,9 @@ class Timer extends Component {
 
   start = () => {
     if (this.props.intervalID === 0) {
-      let intervalID = setInterval(
-        () => {
-          this.decreaseTime();
-        },
-        1000
-      );
+      let intervalID = setInterval(() => {
+        this.decreaseTime();
+      }, 1000);
       this.props.setIntervalID(intervalID);
     }
   };
@@ -55,18 +52,42 @@ class Timer extends Component {
     return (
       <div className="box">
         <div className="center">
-          <h1>
-            {this.getTimerString(this.props.time) }
-          </h1>
-          <button type="button" onClick={this.start}>
-            Start
-          </button>
-          <button type="button" onClick={this.pause}>
-            Pause
-          </button>
-          <button type="button" onClick={this.reset}>
-            Reset
-          </button>
+          <div className="card" style={{ width: "18rem" }}>
+            <div className="card-header text-center">
+              <h1>{this.getTimerString(this.props.time)}</h1>
+            </div>
+            <div className="card-body">
+              <div className="row">
+                <div className="col-4">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={this.start}
+                  >
+                    Start
+                  </button>
+                </div>
+                <div className="col-4">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={this.pause}
+                  >
+                    Pause
+                  </button>
+                </div>
+                <div className="col-4">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={this.reset}
+                  >
+                    Reset
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -75,6 +96,6 @@ class Timer extends Component {
 
 const mapStateToProps = (reducers) => {
   return reducers.timerReducer;
-}
+};
 
 export default connect(mapStateToProps, timerActions)(Timer);

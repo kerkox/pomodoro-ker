@@ -6,7 +6,7 @@ const Menu = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <span className="navbar-brand">
-        <div class="clock icon"></div>        
+        <div className="clock icon"></div>        
       </span>      
       <button
         className="navbar-toggler"
