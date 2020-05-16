@@ -1,0 +1,1 @@
+export const DECREASE_TIME = 'decrease_time';

@@ -6,8 +6,18 @@ import "./index.css";
 // import 'bootstrap/dist/js/bootstrap.min.js'
 import App from './components/App';
 
+import { createStore } from 'redux';
+import { Provider } from 'react-redux'
+import reducers from './reducers'
+const store = createStore(
+  reducers, //all reducers
+  {} //state initial
+)
+
 ReactDOM.render(
-    <App />
+    <Provider store={ store }>
+      <App />
+    </Provider>
   ,document.getElementById('root')
 );
 
