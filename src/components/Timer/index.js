@@ -17,7 +17,7 @@ class Timer extends Component {
   // }
 
   componentDidMount() {
-    this.pause();
+    // this.pause();
   }
 
   getTimerString = (time) => {
