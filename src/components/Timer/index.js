@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux'
+import * as timerActions from '../../actions/timerActions';
 
 class Timer extends Component {
   // constructor(props) {
@@ -28,50 +29,25 @@ class Timer extends Component {
   };
 
   decreaseTime = () => {
-    let seconds = this.state.time.seconds - 1;
-    let minutes = this.state.time.minutes;
-    if (seconds < 0) {
-      seconds = 59;
-      minutes -= 1;
-    }
-    if (minutes <= 0 && seconds <= 0) {
-      clearInterval(this.state.intervalID);
-    }
-    this.setState({
-      ...this.state,
-      time: { 
-        seconds,
-        minutes
-      }
-    });
+   this.props.decreaseTime();
   };
   pause = () => {
     console.log("Pause the timer!!");
-    clearInterval(this.state.intervalID);
-    this.setState({ ...this.state, intervalID: 0 });
+    this.props.pauseTime();
   };
   reset = () => {
-    this.setState({
-      ...this.state,
-      time:{
-        minutes: this.state.timeConfig.minutes,
-        seconds: 0,
-      }
-    });
+    this.props.reset();
   };
 
   start = () => {
-    if (this.state.intervalID === 0) {
-      console.log("this", this);
-      console.log("this.state", this.state);
+    if (this.props.intervalID === 0) {
       let intervalID = setInterval(
         () => {
           this.decreaseTime();
         },
-        1000,
-        this
+        1000
       );
-      this.setState({ ...this.state, intervalID });
+      this.props.setIntervalID(intervalID);
     }
   };
 
@@ -80,7 +56,7 @@ class Timer extends Component {
       <div className="box">
         <div className="center">
           <h1>
-            {this.getTimerString(this.state.time) }
+            {this.getTimerString(this.props.time) }
           </h1>
           <button type="button" onClick={this.start}>
             Start
@@ -101,4 +77,4 @@ const mapStateToProps = (reducers) => {
   return reducers.timerReducer;
 }
 
-export default connect(mapStateToProps, {/* actions */})(Timer);
+export default connect(mapStateToProps, timerActions)(Timer);
