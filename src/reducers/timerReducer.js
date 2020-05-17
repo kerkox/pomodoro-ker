@@ -1,29 +1,40 @@
-import { DECREASE_TIME, PAUSE_TIMER, SET_INTERVAL_ID, RESET_TIMER, LOAD_DATA_CONFIG } from "../types/timerTypes"
+import {
+  DECREASE_TIME,
+  PAUSE_TIMER,
+  SET_INTERVAL_ID,
+  RESET_TIMER,
+  LOAD_DATA_CONFIG,
+} from "../types/timerTypes";
 
 const INITIAL_STATE = {
   timeConfig: {
-        minutes: 25,
+    minutes: 25,
   },
   time: {
     minutes: 0,
-    seconds: 0
+    seconds: 0,
   },
   pause: false,
   intervalID: 0,
-}
+};
 
 export default (state = INITIAL_STATE, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case LOAD_DATA_CONFIG:
-      //load data from localStorage if there not information then 
+      //load data from localStorage if there not information then
       // set time by default value
-      const loadData = JSON.parse(localStorage.getItem('timeConfig') || '{}') ;
-      const timeConfig = {minutes:state.timeConfig.minutes};
+      console.log('i change the data')
+      const loadData = JSON.parse(localStorage.getItem("timeConfig") || "{}");
+      const timeConfig = { minutes: state.timeConfig.minutes };
       if (loadData.minutes) {
         timeConfig.minutes = loadData.minutes;
       }
-
-      return {...state, timeConfig, time:{minutes:timeConfig.minutes,seconds:0}}
+      console.log("timeConfig", timeConfig);
+      return {
+        ...state,
+        timeConfig,
+        time: { minutes: timeConfig.minutes, seconds: 0 },
+      };
     case DECREASE_TIME:
       let seconds = state.time.seconds - 1;
       let minutes = state.time.minutes;
@@ -39,15 +50,19 @@ export default (state = INITIAL_STATE, action) => {
         minutes,
       };
 
-      return {...state, time: time};
+      return { ...state, time: time };
     case PAUSE_TIMER:
       clearInterval(state.intervalID);
-      return {...state, intervalID: 0}
+      return { ...state, intervalID: 0 };
     case SET_INTERVAL_ID:
-      return {...state, intervalID:action.payload}
+      return { ...state, intervalID: action.payload };
     case RESET_TIMER:
       if (state.intervalID !== 0) clearInterval(state.intervalID);
-      return {...state, time:{minutes:state.timeConfig.minutes, seconds:0}}
-    default: return state
+      return {
+        ...state,
+        time: { minutes: state.timeConfig.minutes, seconds: 0 },
+      };
+    default:
+      return state;
   }
-}
+};
