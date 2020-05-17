@@ -3,6 +3,7 @@ import {
   SET_INTERVAL_ID,
   PAUSE_TIMER,
   RESET_TIMER,
+  LOAD_DATA_CONFIG,
 } from "../types/timerTypes";
 
 export const decreaseTime = () => (dispatch) => {
@@ -25,8 +26,14 @@ export const pauseTime = () => (dispatch) => {
   });
 }
 
-export const reset = () => (dispatch) => {
+export const resetTime = () => (dispatch) => {
   dispatch({
     type: RESET_TIMER,
   });
+}
+
+export const loadDefault = () => (dispatch) => {
+  dispatch({
+    type: LOAD_DATA_CONFIG
+  })
 }

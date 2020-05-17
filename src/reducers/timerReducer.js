@@ -1,12 +1,12 @@
-import { DECREASE_TIME, PAUSE_TIMER, SET_INTERVAL_ID, RESET_TIMER } from "../types/timerTypes"
+import { DECREASE_TIME, PAUSE_TIMER, SET_INTERVAL_ID, RESET_TIMER, LOAD_DATA_CONFIG } from "../types/timerTypes"
 
 const INITIAL_STATE = {
-  time: {
-    minutes: 25,
-    seconds: 0
-  },
   timeConfig: {
         minutes: 25,
+  },
+  time: {
+    minutes: 0,
+    seconds: 0
   },
   pause: false,
   intervalID: 0,
@@ -14,6 +14,16 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch(action.type) {
+    case LOAD_DATA_CONFIG:
+      //load data from localStorage if there not information then 
+      // set time by default value
+      const loadData = JSON.parse(localStorage.getItem('timeConfig') || '{}') ;
+      const timeConfig = {minutes:state.timeConfig.minutes};
+      if (loadData.minutes) {
+        timeConfig.minutes = loadData.minutes;
+      }
+
+      return {...state, timeConfig, time:{minutes:timeConfig.minutes,seconds:0}}
     case DECREASE_TIME:
       let seconds = state.time.seconds - 1;
       let minutes = state.time.minutes;

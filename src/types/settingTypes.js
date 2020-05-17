@@ -1,0 +1,1 @@
+export const CHANGE_DEFAULT_TIME = "change_default_time";

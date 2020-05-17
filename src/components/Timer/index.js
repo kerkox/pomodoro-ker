@@ -16,7 +16,8 @@ class Timer extends Component {
   //   };
   // }
 
-  componentDidMount() {
+  componentWillMount() {
+    this.props.loadDefault();
     // this.pause();
   }
 
@@ -36,7 +37,7 @@ class Timer extends Component {
     this.props.pauseTime();
   };
   reset = () => {
-    this.props.reset();
+    this.props.resetTime();
   };
 
   start = () => {
