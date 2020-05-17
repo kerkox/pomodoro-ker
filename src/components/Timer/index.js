@@ -16,8 +16,10 @@ class Timer extends Component {
   //   };
   // }
 
-  componentWillMount() {
-    this.props.loadDefault();
+  componentDidMount() {
+    if(this.props.intervalID === 0){
+      this.props.loadDefault();
+    }
     // this.pause();
   }
 
