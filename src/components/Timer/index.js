@@ -3,19 +3,7 @@ import { connect } from "react-redux";
 import * as timerActions from "../../actions/timerActions";
 
 class Timer extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     timeConfig: {
-  //       minutes: 25,
-  //     },
-  //     timeMinutes: 25,
-  //     timeSeconds: 0,
-  //     pause: false,
-  //     intervalID: 0,
-  //   };
-  // }
-
+  
   componentDidMount() {
     if(this.props.intervalID === 0){
       this.props.loadDefault();
