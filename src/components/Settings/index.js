@@ -11,7 +11,7 @@ class Settings extends Component {
 
   handleChange = (e) => {
     const timeMinutes = e.target.value
-    this.props.timerReducer.changeDefaultTime(timeMinutes)
+    this.props.changeDefaultTime(timeMinutes)
   }
   render() {
     return (
