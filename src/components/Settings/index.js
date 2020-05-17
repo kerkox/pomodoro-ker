@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import * as settingActions from "../../actions/settingActions";
-import * as timerActions from "../../actions/timerActions";
+// import * as timerActions from "../../actions/timerActions";
 
-const { changeDefaultTime } = settingActions;
-const { decreaseTime, pauseTime, resetTime, setIntervalID,loadDefault } = timerActions;
+// const { changeDefaultTime, loadDefaultTimeSetting } = settingActions;
+// const { decreaseTime, pauseTime, resetTime, setIntervalID,loadDefault } = timerActions;
 
 class Settings extends Component {
   componentDidMount() {
-    this.props.loadDefault();
+    this.props.loadDefaultTimeSetting();
   }
 
   handleChange = (e) => {
@@ -18,7 +18,6 @@ class Settings extends Component {
   };
   render() {
     console.log("this.props", this.props);
-    console.log('minutes',this.props.timerReducer.time.minutes);
     return (
       <div className="box">
         <div className="center">
@@ -26,12 +25,20 @@ class Settings extends Component {
             <div className="card-header text-center">Change Settings</div>
             <div className="card-body">
               <div className="row">
-                <input
-                  type="number"
-                  onChange={this.handleChange}
-                  name="time-minutes"
-                  value={Number(this.props.timerReducer.time.minutes)}
-                />
+                <div className="form-group">
+                  <label htmlFor="time-minutes">Minutes</label>
+                  <input
+                    id="time-minutes"
+                    className="form-control"
+                    type="number"
+                    onChange={this.handleChange}
+                    onBlur={this.handleChange}
+                    name="time-minutes"
+                    value={Number(
+                      this.props.config.time.minutes
+                    )}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -40,19 +47,6 @@ class Settings extends Component {
     );
   }
 }
-const mapStateToProps = ({ timerReducer, settingReducer }) => {
-  return {
-    timerReducer,
-    settingReducer,
-  };
-};
-const mapDispatchToProps = {
-  changeDefaultTime,
-  decreaseTime,
-  pauseTime,
-  resetTime,
-  setIntervalID,
-  loadDefault
-};
+const mapStateToProps = ({ settingReducer }) => settingReducer;
 
-export default connect(mapStateToProps, mapDispatchToProps)(Settings);
+export default connect(mapStateToProps, settingActions)(Settings);

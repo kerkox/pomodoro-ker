@@ -27,7 +27,7 @@ export default (state = INITIAL_STATE, action) => {
       const loadData = JSON.parse(localStorage.getItem("timeConfig") || "{}");
       const timeConfig = { minutes: state.timeConfig.minutes };
       if (loadData.minutes) {
-        timeConfig.minutes = loadData.minutes;
+        timeConfig.minutes = Number(loadData.minutes);
       }
       console.log("timeConfig", timeConfig);
       return {
@@ -60,6 +60,7 @@ export default (state = INITIAL_STATE, action) => {
       if (state.intervalID !== 0) clearInterval(state.intervalID);
       return {
         ...state,
+        intervalID:0,
         time: { minutes: state.timeConfig.minutes, seconds: 0 },
       };
     default:
