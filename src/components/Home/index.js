@@ -7,8 +7,8 @@ class Home extends Component {
     return (
       <div>
         <Timer />
-        <div className="row justify-content-md-center">
-          <div className="col-6">
+        <div className="box row justify-content-md-center">
+          <div className="col-8">
             <Task />
           </div>
         </div>
