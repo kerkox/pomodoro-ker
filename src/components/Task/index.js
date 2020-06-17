@@ -6,6 +6,7 @@ export class Task extends Component {
       task: {
         id: 2,
         description: "",
+        complete: false
       }
   }
   componentDidMount = () => {
@@ -15,7 +16,16 @@ export class Task extends Component {
   }
 
   getTasks = () => {
-    return this.state.tasks.map((task) => <li key={task.id}>{task.description}</li>);
+    return this.state.tasks.map((task) => (
+        <div class="input-group mb-3" key={task.id}>
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <input type="checkbox" aria-label="Checkbox for following text input"/>
+            </div>
+          </div>
+          <input type="text" class="form-control" aria-label="" value={task.description}/>
+        </div>
+    ));
   };
 
   addTask = () => {
