@@ -16,15 +16,15 @@ export class Task extends Component {
   }
 
   getTasks = () => {
-    return this.state.tasks.map((task) => (
-        <div class="input-group mb-3" key={task.id}>
-          <div class="input-group-prepend">
-            <div class="input-group-text">
+    return this.state.tasks.map((task,index) => (
+        <div className="input-group mb-3" key={task.id}>
+          <div className="input-group-prepend">
+            <div className="input-group-text">
               <input type="checkbox" aria-label="Checkbox for following text input"/>
             </div>
           </div>
-          <input type="text" class="form-control" aria-label="" value={task.description}/>
-          <input type="button" class="btn btn-danger" value="Delete"/>
+          <input type="text" className="form-control" aria-label="" defaultValue={task.description + `   index: ${index}`}/>
+          <input type="button" className="btn btn-danger" defaultValue="Delete" onClick={() => this.deleteTask(task)}/>
         </div>
     ));
   };
@@ -44,6 +44,14 @@ export class Task extends Component {
     }
     
   };
+
+  deleteTask = (task) => {
+    // delete task from state
+    const tasks = this.state.tasks
+    const index = tasks.indexOf(task)
+    tasks.splice(index,1)
+    this.setState({tasks});
+  }
 
   getValidTask = (task) => this.validateTask(task) && {id:task.id, description:task.description.trim()}
 
