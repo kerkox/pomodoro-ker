@@ -24,6 +24,7 @@ export class Task extends Component {
             </div>
           </div>
           <input type="text" class="form-control" aria-label="" value={task.description}/>
+          <input type="button" class="btn btn-danger" value="Delete"/>
         </div>
     ));
   };
